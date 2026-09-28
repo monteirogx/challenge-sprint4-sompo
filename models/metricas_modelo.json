@@ -1,0 +1,295 @@
+{
+  "versao_modelo": "4.0-regressao_logistica-202609260016",
+  "algoritmo_escolhido": "regressao_logistica",
+  "criterio_escolha": "maior PR-AUC na janela de validação (temporal)",
+  "treinado_em": "2026-09-26T00:16:43",
+  "linhas": {
+    "treino": 7726,
+    "teste": 1971
+  },
+  "periodo_teste_a_partir_de": "2026-07-24",
+  "periodo_validacao_a_partir_de": "2026-07-01",
+  "teste": {
+    "pr_auc": 0.7936,
+    "roc_auc": 0.9679,
+    "brier": 0.0418,
+    "limiar_alerta": 0.25,
+    "recall_alerta": 0.7588,
+    "precisao_alerta": 0.6864,
+    "f1_alerta": 0.7208,
+    "matriz_confusao": {
+      "verdadeiro_negativo": 1703,
+      "falso_positivo": 69,
+      "falso_negativo": 48,
+      "verdadeiro_positivo": 151
+    },
+    "acuracia": 0.9406,
+    "taxa_base_falha": 0.101
+  },
+  "desempenho_por_nivel": {
+    "score>=60 (CRÍTICO)": {
+      "pr_auc": 0.7936,
+      "roc_auc": 0.9679,
+      "brier": 0.0418,
+      "limiar_alerta": 0.6,
+      "recall_alerta": 0.4874,
+      "precisao_alerta": 0.8291,
+      "f1_alerta": 0.6139,
+      "matriz_confusao": {
+        "verdadeiro_negativo": 1752,
+        "falso_positivo": 20,
+        "falso_negativo": 102,
+        "verdadeiro_positivo": 97
+      },
+      "acuracia": 0.9381,
+      "taxa_base_falha": 0.101
+    },
+    "score>=25 (ALTO)": {
+      "pr_auc": 0.7936,
+      "roc_auc": 0.9679,
+      "brier": 0.0418,
+      "limiar_alerta": 0.25,
+      "recall_alerta": 0.7588,
+      "precisao_alerta": 0.6864,
+      "f1_alerta": 0.7208,
+      "matriz_confusao": {
+        "verdadeiro_negativo": 1703,
+        "falso_positivo": 69,
+        "falso_negativo": 48,
+        "verdadeiro_positivo": 151
+      },
+      "acuracia": 0.9406,
+      "taxa_base_falha": 0.101
+    },
+    "score>=10 (MODERADO)": {
+      "pr_auc": 0.7936,
+      "roc_auc": 0.9679,
+      "brier": 0.0418,
+      "limiar_alerta": 0.1,
+      "recall_alerta": 0.9196,
+      "precisao_alerta": 0.5367,
+      "f1_alerta": 0.6778,
+      "matriz_confusao": {
+        "verdadeiro_negativo": 1614,
+        "falso_positivo": 158,
+        "falso_negativo": 16,
+        "verdadeiro_positivo": 183
+      },
+      "acuracia": 0.9117,
+      "taxa_base_falha": 0.101
+    }
+  },
+  "comparacao_modelos": {
+    "baseline_sprint2_random_forest": {
+      "validacao": {
+        "pr_auc": 0.2077,
+        "roc_auc": 0.6916,
+        "brier": 0.0531,
+        "limiar_alerta": 0.25,
+        "recall_alerta": 0.2903,
+        "precisao_alerta": 0.3103,
+        "f1_alerta": 0.3,
+        "matriz_confusao": {
+          "verdadeiro_negativo": 1408,
+          "falso_positivo": 60,
+          "falso_negativo": 66,
+          "verdadeiro_positivo": 27
+        },
+        "acuracia": 0.9193,
+        "taxa_base_falha": 0.0596
+      },
+      "teste": {
+        "pr_auc": 0.2437,
+        "roc_auc": 0.7166,
+        "brier": 0.0854,
+        "limiar_alerta": 0.25,
+        "recall_alerta": 0.2211,
+        "precisao_alerta": 0.3014,
+        "f1_alerta": 0.2551,
+        "matriz_confusao": {
+          "verdadeiro_negativo": 1670,
+          "falso_positivo": 102,
+          "falso_negativo": 155,
+          "verdadeiro_positivo": 44
+        },
+        "acuracia": 0.8696,
+        "taxa_base_falha": 0.101
+      }
+    },
+    "regressao_logistica": {
+      "validacao": {
+        "pr_auc": 0.6988,
+        "roc_auc": 0.9388,
+        "brier": 0.0383,
+        "limiar_alerta": 0.25,
+        "recall_alerta": 0.8387,
+        "precisao_alerta": 0.3786,
+        "f1_alerta": 0.5217,
+        "matriz_confusao": {
+          "verdadeiro_negativo": 1340,
+          "falso_positivo": 128,
+          "falso_negativo": 15,
+          "verdadeiro_positivo": 78
+        },
+        "acuracia": 0.9084,
+        "taxa_base_falha": 0.0596
+      },
+      "teste": {
+        "pr_auc": 0.7936,
+        "roc_auc": 0.9679,
+        "brier": 0.0418,
+        "limiar_alerta": 0.25,
+        "recall_alerta": 0.7588,
+        "precisao_alerta": 0.6864,
+        "f1_alerta": 0.7208,
+        "matriz_confusao": {
+          "verdadeiro_negativo": 1703,
+          "falso_positivo": 69,
+          "falso_negativo": 48,
+          "verdadeiro_positivo": 151
+        },
+        "acuracia": 0.9406,
+        "taxa_base_falha": 0.101
+      }
+    },
+    "random_forest": {
+      "validacao": {
+        "pr_auc": 0.6832,
+        "roc_auc": 0.9333,
+        "brier": 0.0321,
+        "limiar_alerta": 0.25,
+        "recall_alerta": 0.8387,
+        "precisao_alerta": 0.4643,
+        "f1_alerta": 0.5977,
+        "matriz_confusao": {
+          "verdadeiro_negativo": 1378,
+          "falso_positivo": 90,
+          "falso_negativo": 15,
+          "verdadeiro_positivo": 78
+        },
+        "acuracia": 0.9327,
+        "taxa_base_falha": 0.0596
+      },
+      "teste": {
+        "pr_auc": 0.7599,
+        "roc_auc": 0.9586,
+        "brier": 0.0486,
+        "limiar_alerta": 0.25,
+        "recall_alerta": 0.6583,
+        "precisao_alerta": 0.712,
+        "f1_alerta": 0.6841,
+        "matriz_confusao": {
+          "verdadeiro_negativo": 1719,
+          "falso_positivo": 53,
+          "falso_negativo": 68,
+          "verdadeiro_positivo": 131
+        },
+        "acuracia": 0.9386,
+        "taxa_base_falha": 0.101
+      }
+    },
+    "gradient_boosting": {
+      "validacao": {
+        "pr_auc": 0.6736,
+        "roc_auc": 0.9372,
+        "brier": 0.037,
+        "limiar_alerta": 0.25,
+        "recall_alerta": 0.8065,
+        "precisao_alerta": 0.3989,
+        "f1_alerta": 0.5338,
+        "matriz_confusao": {
+          "verdadeiro_negativo": 1355,
+          "falso_positivo": 113,
+          "falso_negativo": 18,
+          "verdadeiro_positivo": 75
+        },
+        "acuracia": 0.9161,
+        "taxa_base_falha": 0.0596
+      },
+      "teste": {
+        "pr_auc": 0.7753,
+        "roc_auc": 0.961,
+        "brier": 0.0421,
+        "limiar_alerta": 0.25,
+        "recall_alerta": 0.7638,
+        "precisao_alerta": 0.7136,
+        "f1_alerta": 0.7379,
+        "matriz_confusao": {
+          "verdadeiro_negativo": 1711,
+          "falso_positivo": 61,
+          "falso_negativo": 47,
+          "verdadeiro_positivo": 152
+        },
+        "acuracia": 0.9452,
+        "taxa_base_falha": 0.101
+      }
+    }
+  },
+  "importancia_variaveis": [
+    {
+      "variavel": "vibracao_mm_s",
+      "queda_pr_auc": 0.4706
+    },
+    {
+      "variavel": "pressao_oleo_psi",
+      "queda_pr_auc": 0.1606
+    },
+    {
+      "variavel": "idade_anos",
+      "queda_pr_auc": 0.1393
+    },
+    {
+      "variavel": "temperatura_motor_c",
+      "queda_pr_auc": 0.0209
+    },
+    {
+      "variavel": "regiao",
+      "queda_pr_auc": 0.0122
+    },
+    {
+      "variavel": "carga_motor_pct",
+      "queda_pr_auc": 0.0095
+    },
+    {
+      "variavel": "declividade_terreno_pct",
+      "queda_pr_auc": 0.0086
+    },
+    {
+      "variavel": "temperatura_ambiente_c",
+      "queda_pr_auc": 0.0051
+    },
+    {
+      "variavel": "umidade_relativa_pct",
+      "queda_pr_auc": -0.0
+    },
+    {
+      "variavel": "horas_uso_continuo",
+      "queda_pr_auc": -0.0009
+    },
+    {
+      "variavel": "tipo_operacao",
+      "queda_pr_auc": -0.0012
+    },
+    {
+      "variavel": "tipo_equipamento",
+      "queda_pr_auc": -0.0013
+    },
+    {
+      "variavel": "rpm_medio",
+      "queda_pr_auc": -0.0031
+    }
+  ],
+  "referencia_maquina_saudavel": {
+    "idade_anos": 11.0,
+    "horas_uso_continuo": 9.0,
+    "rpm_medio": 1910.0,
+    "temperatura_motor_c": 87.9,
+    "pressao_oleo_psi": 45.3,
+    "vibracao_mm_s": 4.7725,
+    "carga_motor_pct": 61.2,
+    "temperatura_ambiente_c": 26.6,
+    "umidade_relativa_pct": 57.6,
+    "declividade_terreno_pct": 7.6
+  },
+  "sha256_modelo": "d43a34874e41c4735a4edeb35afcd61e55a1cf054ef3c4fac0a19cf981e0a487"
+}

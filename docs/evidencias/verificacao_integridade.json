@@ -1,0 +1,16 @@
+{
+  "leituras": {
+    "integra": true,
+    "leituras_verificadas": 10161,
+    "leituras_violadas": []
+  },
+  "auditoria": {
+    "integra": true,
+    "eventos_verificados": 22,
+    "primeiro_evento_violado": null
+  },
+  "modelo": {
+    "integro": true,
+    "versao": "4.0-regressao_logistica-202609260016"
+  }
+}

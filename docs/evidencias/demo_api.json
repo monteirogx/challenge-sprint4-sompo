@@ -1,0 +1,816 @@
+[
+  {
+    "cenario": "1. Saúde da API",
+    "rota": "GET /saude",
+    "perfil": null,
+    "status_http": 200,
+    "resposta": {
+      "status": "ok",
+      "versao_sistema": "4.0.0",
+      "versao_modelo": "4.0-regressao_logistica-202609260016"
+    }
+  },
+  {
+    "cenario": "2. Trator novo em operação normal",
+    "rota": "POST /telemetria",
+    "perfil": "operador",
+    "status_http": 200,
+    "resposta": {
+      "id_leitura": 10154,
+      "id_predicao": 10154,
+      "id_equipamento": "EQ-201",
+      "data_hora": "2026-09-25 23:47:18",
+      "versao_modelo": "4.0-regressao_logistica-202609260016",
+      "campos_imputados": [],
+      "id_alerta": null,
+      "acao_alerta": null,
+      "score_risco": 0.0,
+      "nivel_risco": "BAIXO",
+      "alerta": false,
+      "regra_seguranca": null,
+      "fatores": {
+        "principais_contribuicoes_modelo": [],
+        "limites_operacionais_violados": [],
+        "regras_seguranca_acionadas": []
+      },
+      "recomendacoes": {
+        "operador": "Operação liberada.",
+        "tecnico": "Manter o plano de manutenção preventiva.",
+        "gestor": "Nenhuma ação necessária.",
+        "analista": "Risco dentro do esperado."
+      }
+    }
+  },
+  {
+    "cenario": "3. Colheitadeira antiga em degradação (deve alertar)",
+    "rota": "POST /telemetria",
+    "perfil": "operador",
+    "status_http": 200,
+    "resposta": {
+      "id_leitura": 10155,
+      "id_predicao": 10155,
+      "id_equipamento": "EQ-202",
+      "data_hora": "2026-09-25 23:57:18",
+      "versao_modelo": "4.0-regressao_logistica-202609260016",
+      "campos_imputados": [],
+      "id_alerta": 6,
+      "acao_alerta": "criado",
+      "score_risco": 100.0,
+      "nivel_risco": "CRÍTICO",
+      "alerta": true,
+      "regra_seguranca": "Superaquecimento severo (>= 110 °C)",
+      "fatores": {
+        "principais_contribuicoes_modelo": [
+          {
+            "variavel": "vibracao_mm_s",
+            "valor": 9.55,
+            "referencia_saudavel": 4.77,
+            "contribuicao_pontos": 17.2,
+            "nome": "Vibração"
+          },
+          {
+            "variavel": "pressao_oleo_psi",
+            "valor": 21.1,
+            "referencia_saudavel": 45.3,
+            "contribuicao_pontos": 4.8,
+            "nome": "Pressão do óleo"
+          }
+        ],
+        "limites_operacionais_violados": [
+          {
+            "variavel": "temperatura_motor_c",
+            "valor": 113.0,
+            "limite": "> 98",
+            "descricao": "Temperatura do motor acima de 98 °C",
+            "componente": "sistema de arrefecimento (radiador, bomba d'água, líquido)"
+          },
+          {
+            "variavel": "vibracao_mm_s",
+            "valor": 9.55,
+            "limite": "> 7.1",
+            "descricao": "Vibração acima de 7,1 mm/s (zona de alerta ISO 10816)",
+            "componente": "rolamentos, eixos e transmissão"
+          },
+          {
+            "variavel": "pressao_oleo_psi",
+            "valor": 21.1,
+            "limite": "< 25",
+            "descricao": "Pressão do óleo abaixo de 25 psi",
+            "componente": "sistema de lubrificação (nível, filtro e bomba de óleo)"
+          },
+          {
+            "variavel": "carga_motor_pct",
+            "valor": 94.6,
+            "limite": "> 90",
+            "descricao": "Carga do motor acima de 90%",
+            "componente": "dimensionamento do implemento / sobrecarga"
+          },
+          {
+            "variavel": "horas_uso_continuo",
+            "valor": 14.3,
+            "limite": "> 12",
+            "descricao": "Mais de 12 h de uso contínuo",
+            "componente": "jornada da máquina (pausas de resfriamento)"
+          },
+          {
+            "variavel": "idade_anos",
+            "valor": 16,
+            "limite": ">= 15",
+            "descricao": "Equipamento com 15 anos ou mais",
+            "componente": "revisão geral por envelhecimento"
+          }
+        ],
+        "regras_seguranca_acionadas": [
+          "Superaquecimento severo (>= 110 °C)"
+        ]
+      },
+      "recomendacoes": {
+        "operador": "PARE a máquina assim que for seguro e acione a manutenção. Motivo: Superaquecimento severo (>= 110 °C).",
+        "tecnico": "Inspeção imediata (até 24 h), antes de liberar a máquina: sistema de arrefecimento (radiador, bomba d'água, líquido), rolamentos, eixos e transmissão, sistema de lubrificação (nível, filtro e bomba de óleo).",
+        "gestor": "Retire o equipamento da escala e aloque uma máquina reserva; risco alto de quebra nos próximos 7 dias.",
+        "analista": "Exposição elevada a sinistro: registre o alerta e acompanhe se a intervenção preventiva é feita."
+      }
+    }
+  },
+  {
+    "cenario": "4. Sensor com 2 campos ausentes (completa e sinaliza)",
+    "rota": "POST /telemetria",
+    "perfil": "tecnico",
+    "status_http": 200,
+    "resposta": {
+      "id_leitura": 10156,
+      "id_predicao": 10156,
+      "id_equipamento": "EQ-203",
+      "data_hora": "2026-09-26 00:07:18",
+      "versao_modelo": "4.0-regressao_logistica-202609260016",
+      "campos_imputados": [
+        "pressao_oleo_psi",
+        "umidade_relativa_pct"
+      ],
+      "id_alerta": null,
+      "acao_alerta": null,
+      "score_risco": 1.2,
+      "nivel_risco": "BAIXO",
+      "alerta": false,
+      "regra_seguranca": null,
+      "fatores": {
+        "principais_contribuicoes_modelo": [],
+        "limites_operacionais_violados": [],
+        "regras_seguranca_acionadas": []
+      },
+      "recomendacoes": {
+        "operador": "Operação liberada.",
+        "tecnico": "Manter o plano de manutenção preventiva.",
+        "gestor": "Nenhuma ação necessária.",
+        "analista": "Risco dentro do esperado."
+      }
+    }
+  },
+  {
+    "cenario": "5. Leitura inválida (erro de sensor + região inexistente)",
+    "rota": "POST /telemetria",
+    "perfil": "operador",
+    "status_http": 422,
+    "resposta": {
+      "erro": "leitura_invalida",
+      "detalhe": [
+        {
+          "campo": "regiao",
+          "mensagem": "Value error, região inválida; use uma de ['MT', 'GO', 'MS', 'BA', 'MG', 'SP', 'PR', 'RS']"
+        },
+        {
+          "campo": "temperatura_motor_c",
+          "mensagem": "Input should be greater than or equal to -10"
+        }
+      ],
+      "id_requisicao": "4c1818b97559"
+    }
+  },
+  {
+    "cenario": "6. Reenvio duplicado da mesma leitura",
+    "rota": "POST /telemetria",
+    "perfil": "operador",
+    "status_http": 409,
+    "resposta": {
+      "erro": "leitura_duplicada",
+      "detalhe": "Leitura de EQ-201 em 2026-09-25 23:47:18 já registrada.",
+      "id_requisicao": "38212fc5a5a4"
+    }
+  },
+  {
+    "cenario": "7. Chave de API inválida",
+    "rota": "POST /telemetria",
+    "perfil": null,
+    "status_http": 401,
+    "resposta": {
+      "erro": "nao_autenticado",
+      "detalhe": "Chave de acesso inválida.",
+      "id_requisicao": "d5eabdcb22f0"
+    }
+  },
+  {
+    "cenario": "8. Perfil gestor tentando enviar telemetria (sem permissão)",
+    "rota": "POST /telemetria",
+    "perfil": "gestor",
+    "status_http": 403,
+    "resposta": {
+      "erro": "sem_permissao",
+      "detalhe": "Perfil 'gestor' não tem permissão 'enviar_telemetria'.",
+      "id_requisicao": "48b3fcd92a20"
+    }
+  },
+  {
+    "cenario": "9. Lote com 4 leituras válidas e 1 inválida",
+    "rota": "POST /telemetria/lote",
+    "perfil": "tecnico",
+    "status_http": 200,
+    "resposta": {
+      "recebidas": 5,
+      "aceitas": 4,
+      "rejeitadas": 1,
+      "resultados": [
+        {
+          "posicao": 0,
+          "status": "aceita",
+          "id_leitura": 10157,
+          "score_risco": 0.9,
+          "nivel_risco": "BAIXO"
+        },
+        {
+          "posicao": 1,
+          "status": "aceita",
+          "id_leitura": 10158,
+          "score_risco": 0.0,
+          "nivel_risco": "BAIXO"
+        },
+        {
+          "posicao": 2,
+          "status": "aceita",
+          "id_leitura": 10159,
+          "score_risco": 0.5,
+          "nivel_risco": "BAIXO"
+        },
+        {
+          "posicao": 3,
+          "status": "aceita",
+          "id_leitura": 10160,
+          "score_risco": 10.7,
+          "nivel_risco": "MODERADO"
+        },
+        {
+          "posicao": 4,
+          "status": "rejeitada",
+          "erros": [
+            "Value error, id_equipamento deve seguir o formato EQ-000",
+            "Field required",
+            "Field required",
+            "Field required",
+            "Field required"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "cenario": "10. Alertas ativos na frota (gestor)",
+    "rota": "GET /alertas",
+    "perfil": "gestor",
+    "status_http": 200,
+    "resposta": {
+      "total": 6,
+      "alertas": [
+        {
+          "id_alerta": 6,
+          "status": "ABERTO",
+          "nivel_risco": "CRÍTICO",
+          "score_risco": 100.0,
+          "id_equipamento": "EQ-202",
+          "regiao": "MT",
+          "tipo_equipamento": "Colheitadeira",
+          "tipo_operacao": "Transporte",
+          "data_hora_leitura": "2026-09-25 23:57:18",
+          "aberto_em": "2026-09-26 00:17:19",
+          "atualizado_em": "2026-09-26 00:17:19",
+          "tratado_por": null,
+          "observacao": null,
+          "regra_seguranca": "Superaquecimento severo (>= 110 °C)",
+          "fatores_json": {
+            "principais_contribuicoes_modelo": [
+              {
+                "variavel": "vibracao_mm_s",
+                "valor": 9.55,
+                "referencia_saudavel": 4.77,
+                "contribuicao_pontos": 17.2,
+                "nome": "Vibração"
+              },
+              {
+                "variavel": "pressao_oleo_psi",
+                "valor": 21.1,
+                "referencia_saudavel": 45.3,
+                "contribuicao_pontos": 4.8,
+                "nome": "Pressão do óleo"
+              }
+            ],
+            "limites_operacionais_violados": [
+              {
+                "variavel": "temperatura_motor_c",
+                "valor": 113.0,
+                "limite": "> 98",
+                "descricao": "Temperatura do motor acima de 98 °C",
+                "componente": "sistema de arrefecimento (radiador, bomba d'água, líquido)"
+              },
+              {
+                "variavel": "vibracao_mm_s",
+                "valor": 9.55,
+                "limite": "> 7.1",
+                "descricao": "Vibração acima de 7,1 mm/s (zona de alerta ISO 10816)",
+                "componente": "rolamentos, eixos e transmissão"
+              },
+              {
+                "variavel": "pressao_oleo_psi",
+                "valor": 21.1,
+                "limite": "< 25",
+                "descricao": "Pressão do óleo abaixo de 25 psi",
+                "componente": "sistema de lubrificação (nível, filtro e bomba de óleo)"
+              },
+              {
+                "variavel": "carga_motor_pct",
+                "valor": 94.6,
+                "limite": "> 90",
+                "descricao": "Carga do motor acima de 90%",
+                "componente": "dimensionamento do implemento / sobrecarga"
+              },
+              {
+                "variavel": "horas_uso_continuo",
+                "valor": 14.3,
+                "limite": "> 12",
+                "descricao": "Mais de 12 h de uso contínuo",
+                "componente": "jornada da máquina (pausas de resfriamento)"
+              },
+              {
+                "variavel": "idade_anos",
+                "valor": 16,
+                "limite": ">= 15",
+                "descricao": "Equipamento com 15 anos ou mais",
+                "componente": "revisão geral por envelhecimento"
+              }
+            ],
+            "regras_seguranca_acionadas": [
+              "Superaquecimento severo (>= 110 °C)"
+            ]
+          },
+          "recomendacao": {
+            "operador": "PARE a máquina assim que for seguro e acione a manutenção. Motivo: Superaquecimento severo (>= 110 °C).",
+            "tecnico": "Inspeção imediata (até 24 h), antes de liberar a máquina: sistema de arrefecimento (radiador, bomba d'água, líquido), rolamentos, eixos e transmissão, sistema de lubrificação (nível, filtro e bomba de óleo).",
+            "gestor": "Retire o equipamento da escala e aloque uma máquina reserva; risco alto de quebra nos próximos 7 dias.",
+            "analista": "Exposição elevada a sinistro: registre o alerta e acompanhe se a intervenção preventiva é feita."
+          }
+        },
+        {
+          "id_alerta": 3,
+          "status": "ABERTO",
+          "nivel_risco": "CRÍTICO",
+          "score_risco": 60.2,
+          "id_equipamento": "EQ-050",
+          "regiao": "RS",
+          "tipo_equipamento": "Trator",
+          "tipo_operacao": "Preparo de solo",
+          "data_hora_leitura": "2026-08-27 14:28:00",
+          "aberto_em": "2026-09-26 00:16:44",
+          "atualizado_em": "2026-09-26 00:16:44",
+          "tratado_por": null,
+          "observacao": null,
+          "regra_seguranca": null,
+          "fatores_json": {
+            "principais_contribuicoes_modelo": [
+              {
+                "variavel": "vibracao_mm_s",
+                "valor": 6.45,
+                "referencia_saudavel": 4.77,
+                "contribuicao_pontos": 48.8,
+                "nome": "Vibração"
+              },
+              {
+                "variavel": "idade_anos",
+                "valor": 2.0,
+                "referencia_saudavel": 11.0,
+                "contribuicao_pontos": 37.5,
+                "nome": "Idade do equipamento"
+              },
+              {
+                "variavel": "temperatura_motor_c",
+                "valor": 97.0,
+                "referencia_saudavel": 87.9,
+                "contribuicao_pontos": 21.6,
+                "nome": "Temperatura do motor"
+              }
+            ],
+            "limites_operacionais_violados": [],
+            "regras_seguranca_acionadas": []
+          },
+          "recomendacao": {
+            "operador": "PARE a máquina assim que for seguro e acione a manutenção. Motivo: combinação de fatores de desgaste.",
+            "tecnico": "Inspeção imediata (até 24 h), antes de liberar a máquina: rolamentos, eixos e transmissão, revisão geral por envelhecimento, sistema de arrefecimento (radiador, bomba d'água, líquido).",
+            "gestor": "Retire o equipamento da escala e aloque uma máquina reserva; risco alto de quebra nos próximos 7 dias.",
+            "analista": "Exposição elevada a sinistro: registre o alerta e acompanhe se a intervenção preventiva é feita."
+          }
+        },
+        {
+          "id_alerta": 4,
+          "status": "ABERTO",
+          "nivel_risco": "ALTO",
+          "score_risco": 49.4,
+          "id_equipamento": "EQ-053",
+          "regiao": "RS",
+          "tipo_equipamento": "Pulverizador",
+          "tipo_operacao": "Transporte",
+          "data_hora_leitura": "2026-08-28 16:58:00",
+          "aberto_em": "2026-09-26 00:16:44",
+          "atualizado_em": "2026-09-26 00:16:44",
+          "tratado_por": null,
+          "observacao": null,
+          "regra_seguranca": null,
+          "fatores_json": {
+            "principais_contribuicoes_modelo": [
+              {
+                "variavel": "vibracao_mm_s",
+                "valor": 6.35,
+                "referencia_saudavel": 4.77,
+                "contribuicao_pontos": 40.6,
+                "nome": "Vibração"
+              },
+              {
+                "variavel": "idade_anos",
+                "valor": 5.0,
+                "referencia_saudavel": 11.0,
+                "contribuicao_pontos": 24.7,
+                "nome": "Idade do equipamento"
+              },
+              {
+                "variavel": "pressao_oleo_psi",
+                "valor": 41.7,
+                "referencia_saudavel": 45.3,
+                "contribuicao_pontos": 19.7,
+                "nome": "Pressão do óleo"
+              }
+            ],
+            "limites_operacionais_violados": [],
+            "regras_seguranca_acionadas": []
+          },
+          "recomendacao": {
+            "operador": "Reduza carga e rotação, faça pausas de resfriamento e avise o supervisor ao fim do turno.",
+            "tecnico": "Agende inspeção em até 72 h com foco em: rolamentos, eixos e transmissão, revisão geral por envelhecimento, sistema de lubrificação (nível, filtro e bomba de óleo).",
+            "gestor": "Programe a parada preventiva na janela de menor demanda desta semana.",
+            "analista": "Risco acima do normal: monitore a tendência do equipamento e a execução da manutenção."
+          }
+        },
+        {
+          "id_alerta": 5,
+          "status": "ABERTO",
+          "nivel_risco": "ALTO",
+          "score_risco": 48.0,
+          "id_equipamento": "EQ-079",
+          "regiao": "MT",
+          "tipo_equipamento": "Pulverizador",
+          "tipo_operacao": "Transporte",
+          "data_hora_leitura": "2026-08-28 12:43:00",
+          "aberto_em": "2026-09-26 00:16:44",
+          "atualizado_em": "2026-09-26 00:16:44",
+          "tratado_por": null,
+          "observacao": null,
+          "regra_seguranca": null,
+          "fatores_json": {
+            "principais_contribuicoes_modelo": [
+              {
+                "variavel": "vibracao_mm_s",
+                "valor": 6.96,
+                "referencia_saudavel": 4.77,
+                "contribuicao_pontos": 44.5,
+                "nome": "Vibração"
+              },
+              {
+                "variavel": "pressao_oleo_psi",
+                "valor": 34.6,
+                "referencia_saudavel": 45.3,
+                "contribuicao_pontos": 40.9,
+                "nome": "Pressão do óleo"
+              },
+              {
+                "variavel": "temperatura_motor_c",
+                "valor": 93.2,
+                "referencia_saudavel": 87.9,
+                "contribuicao_pontos": 12.4,
+                "nome": "Temperatura do motor"
+              }
+            ],
+            "limites_operacionais_violados": [
+              {
+                "variavel": "idade_anos",
+                "valor": 19.0,
+                "limite": ">= 15",
+                "descricao": "Equipamento com 15 anos ou mais",
+                "componente": "revisão geral por envelhecimento"
+              }
+            ],
+            "regras_seguranca_acionadas": []
+          },
+          "recomendacao": {
+            "operador": "Reduza carga e rotação, faça pausas de resfriamento e avise o supervisor ao fim do turno.",
+            "tecnico": "Agende inspeção em até 72 h com foco em: revisão geral por envelhecimento, rolamentos, eixos e transmissão, sistema de lubrificação (nível, filtro e bomba de óleo).",
+            "gestor": "Programe a parada preventiva na janela de menor demanda desta semana.",
+            "analista": "Risco acima do normal: monitore a tendência do equipamento e a execução da manutenção."
+          }
+        },
+        {
+          "id_alerta": 1,
+          "status": "ABERTO",
+          "nivel_risco": "ALTO",
+          "score_risco": 36.7,
+          "id_equipamento": "EQ-001",
+          "regiao": "SP",
+          "tipo_equipamento": "Colheitadeira",
+          "tipo_operacao": "Colheita",
+          "data_hora_leitura": "2026-08-28 11:31:00",
+          "aberto_em": "2026-09-26 00:16:44",
+          "atualizado_em": "2026-09-26 00:16:44",
+          "tratado_por": null,
+          "observacao": null,
+          "regra_seguranca": null,
+          "fatores_json": {
+            "principais_contribuicoes_modelo": [
+              {
+                "variavel": "vibracao_mm_s",
+                "valor": 6.18,
+                "referencia_saudavel": 4.77,
+                "contribuicao_pontos": 29.9,
+                "nome": "Vibração"
+              },
+              {
+                "variavel": "pressao_oleo_psi",
+                "valor": 39.9,
+                "referencia_saudavel": 45.3,
+                "contribuicao_pontos": 22.5,
+                "nome": "Pressão do óleo"
+              },
+              {
+                "variavel": "temperatura_motor_c",
+                "valor": 97.8,
+                "referencia_saudavel": 87.9,
+                "contribuicao_pontos": 18.5,
+                "nome": "Temperatura do motor"
+              }
+            ],
+            "limites_operacionais_violados": [
+              {
+                "variavel": "rpm_medio",
+                "valor": 2450.0,
+                "limite": "> 2400",
+                "descricao": "RPM médio acima de 2.400",
+                "componente": "regime de operação do motor (sobrerrotação)"
+              },
+              {
+                "variavel": "carga_motor_pct",
+                "valor": 98.1,
+                "limite": "> 90",
+                "descricao": "Carga do motor acima de 90%",
+                "componente": "dimensionamento do implemento / sobrecarga"
+              }
+            ],
+            "regras_seguranca_acionadas": []
+          },
+          "recomendacao": {
+            "operador": "Reduza carga e rotação, faça pausas de resfriamento e avise o supervisor ao fim do turno.",
+            "tecnico": "Agende inspeção em até 72 h com foco em: regime de operação do motor (sobrerrotação), dimensionamento do implemento / sobrecarga, rolamentos, eixos e transmissão.",
+            "gestor": "Programe a parada preventiva na janela de menor demanda desta semana.",
+            "analista": "Risco acima do normal: monitore a tendência do equipamento e a execução da manutenção."
+          }
+        },
+        {
+          "id_alerta": 2,
+          "status": "ABERTO",
+          "nivel_risco": "ALTO",
+          "score_risco": 28.0,
+          "id_equipamento": "EQ-013",
+          "regiao": "MT",
+          "tipo_equipamento": "Trator",
+          "tipo_operacao": "Plantio",
+          "data_hora_leitura": "2026-08-28 09:37:00",
+          "aberto_em": "2026-09-26 00:16:44",
+          "atualizado_em": "2026-09-26 00:16:44",
+          "tratado_por": null,
+          "observacao": null,
+          "regra_seguranca": null,
+          "fatores_json": {
+            "principais_contribuicoes_modelo": [
+              {
+                "variavel": "vibracao_mm_s",
+                "valor": 6.62,
+                "referencia_saudavel": 4.77,
+                "contribuicao_pontos": 25.5,
+                "nome": "Vibração"
+              },
+              {
+                "variavel": "pressao_oleo_psi",
+                "valor": 33.8,
+                "referencia_saudavel": 45.3,
+                "contribuicao_pontos": 25.4,
+                "nome": "Pressão do óleo"
+              },
+              {
+                "variavel": "temperatura_motor_c",
+                "valor": 91.7,
+                "referencia_saudavel": 87.9,
+                "contribuicao_pontos": 6.8,
+                "nome": "Temperatura do motor"
+              }
+            ],
+            "limites_operacionais_violados": [
+              {
+                "variavel": "idade_anos",
+                "valor": 19.0,
+                "limite": ">= 15",
+                "descricao": "Equipamento com 15 anos ou mais",
+                "componente": "revisão geral por envelhecimento"
+              }
+            ],
+            "regras_seguranca_acionadas": []
+          },
+          "recomendacao": {
+            "operador": "Reduza carga e rotação, faça pausas de resfriamento e avise o supervisor ao fim do turno.",
+            "tecnico": "Agende inspeção em até 72 h com foco em: revisão geral por envelhecimento, rolamentos, eixos e transmissão, sistema de lubrificação (nível, filtro e bomba de óleo).",
+            "gestor": "Programe a parada preventiva na janela de menor demanda desta semana.",
+            "analista": "Risco acima do normal: monitore a tendência do equipamento e a execução da manutenção."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "cenario": "11. Técnico reconhece o alerta #6 (inspeção agendada)",
+    "rota": "PATCH /alertas/6",
+    "perfil": "tecnico",
+    "status_http": 200,
+    "resposta": {
+      "id_alerta": 6,
+      "id_equipamento": "EQ-202",
+      "status_anterior": "ABERTO",
+      "status": "RECONHECIDO"
+    }
+  },
+  {
+    "cenario": "12. Resumo de risco por região (gestor)",
+    "rota": "GET /relatorios/resumo?agrupar_por=regiao",
+    "perfil": "gestor",
+    "status_http": 200,
+    "resposta": [
+      {
+        "regiao": "BA",
+        "leituras": 1126,
+        "score_medio": 8.8,
+        "pct_leituras_em_alerta": 11.1,
+        "equipamentos_em_alerta_agora": 0
+      },
+      {
+        "regiao": "GO",
+        "leituras": 1406,
+        "score_medio": 8.0,
+        "pct_leituras_em_alerta": 9.7,
+        "equipamentos_em_alerta_agora": 0
+      },
+      {
+        "regiao": "MG",
+        "leituras": 755,
+        "score_medio": 7.8,
+        "pct_leituras_em_alerta": 9.3,
+        "equipamentos_em_alerta_agora": 0
+      },
+      {
+        "regiao": "RS",
+        "leituras": 1650,
+        "score_medio": 7.5,
+        "pct_leituras_em_alerta": 9.2,
+        "equipamentos_em_alerta_agora": 2
+      },
+      {
+        "regiao": "MT",
+        "leituras": 899,
+        "score_medio": 7.3,
+        "pct_leituras_em_alerta": 9.1,
+        "equipamentos_em_alerta_agora": 3
+      },
+      {
+        "regiao": "MS",
+        "leituras": 1662,
+        "score_medio": 7.2,
+        "pct_leituras_em_alerta": 9.2,
+        "equipamentos_em_alerta_agora": 0
+      },
+      {
+        "regiao": "SP",
+        "leituras": 1280,
+        "score_medio": 6.4,
+        "pct_leituras_em_alerta": 7.7,
+        "equipamentos_em_alerta_agora": 1
+      },
+      {
+        "regiao": "PR",
+        "leituras": 1382,
+        "score_medio": 5.6,
+        "pct_leituras_em_alerta": 6.9,
+        "equipamentos_em_alerta_agora": 0
+      }
+    ]
+  },
+  {
+    "cenario": "13. Operador tentando ver auditoria (sem permissão)",
+    "rota": "GET /auditoria?limite=5",
+    "perfil": "operador",
+    "status_http": 403,
+    "resposta": {
+      "erro": "sem_permissao",
+      "detalhe": "Perfil 'operador' não tem permissão 'ver_auditoria'.",
+      "id_requisicao": "952e50c72b2c"
+    }
+  },
+  {
+    "cenario": "14. Últimos eventos de auditoria (analista)",
+    "rota": "GET /auditoria?limite=5",
+    "perfil": "analista",
+    "status_http": 200,
+    "resposta": [
+      {
+        "id_evento": 17,
+        "data_hora": "2026-09-26 00:17:19",
+        "perfil": "operador",
+        "acao": "ver_auditoria",
+        "recurso": "/auditoria",
+        "resultado": "negado",
+        "detalhes_json": "{\"motivo\": \"sem_permissao\"}",
+        "hash_anterior": "545781b0a9f03b60e13c93c68a60bc4b6fc7211fbc16f918f3aa2d0c6250ef98",
+        "hash_evento": "d6a2ec7515d329f92c908380220c8477c48d8fe0c81510f5c58907b55d2177dd"
+      },
+      {
+        "id_evento": 16,
+        "data_hora": "2026-09-26 00:17:19",
+        "perfil": "tecnico",
+        "acao": "tratar_alerta",
+        "recurso": "alerta 6",
+        "resultado": "sucesso",
+        "detalhes_json": "{\"id_alerta\": 6, \"id_equipamento\": \"EQ-202\", \"observacao\": \"Inspeção de rolamentos agendada para amanhã\", \"status\": \"RECONHECIDO\", \"status_anterior\": \"ABERTO\"}",
+        "hash_anterior": "6393e08eb3785e3f0282f63653cac59238c58812b1742e6a4657c1d0b4244f32",
+        "hash_evento": "545781b0a9f03b60e13c93c68a60bc4b6fc7211fbc16f918f3aa2d0c6250ef98"
+      },
+      {
+        "id_evento": 15,
+        "data_hora": "2026-09-26 00:17:19",
+        "perfil": "gestor",
+        "acao": "ver_alertas",
+        "recurso": "/alertas",
+        "resultado": "sucesso",
+        "detalhes_json": "{\"retornados\": 6}",
+        "hash_anterior": "1c7b46701fe2c522ddf9f45de2d73d56a82f1bec7efc00c102d9450cf6282c5a",
+        "hash_evento": "6393e08eb3785e3f0282f63653cac59238c58812b1742e6a4657c1d0b4244f32"
+      },
+      {
+        "id_evento": 14,
+        "data_hora": "2026-09-26 00:17:19",
+        "perfil": "tecnico",
+        "acao": "enviar_telemetria",
+        "recurso": "abc",
+        "resultado": "rejeitada",
+        "detalhes_json": "{\"erros\": [{\"ctx\": {\"error\": \"id_equipamento deve seguir o formato EQ-000\"}, \"loc\": [\"id_equipamento\"], \"msg\": \"Value error, id_equipamento deve seguir o formato EQ-000\", \"type\": \"value_error\"}, {\"loc\": [\"tipo_equipamento\"], \"msg\": \"Field required\", \"type\": \"missing\"}, {\"loc\": [\"regiao\"], \"msg\": \"Field required\", \"type\": \"missing\"}, {\"loc\": [\"tipo_operacao\"], \"msg\": \"Field required\", \"type\": \"missing\"}, {\"loc\": [\"idade_anos\"], \"msg\": \"Field required\", \"type\": \"missing\"}], \"motivo\": \"validacao\"}",
+        "hash_anterior": "f6b901cb7c0d289b11a8ac5799279967c85ff2acb8df67ddf5dffe9f6f6f9cf4",
+        "hash_evento": "1c7b46701fe2c522ddf9f45de2d73d56a82f1bec7efc00c102d9450cf6282c5a"
+      },
+      {
+        "id_evento": 13,
+        "data_hora": "2026-09-26 00:17:19",
+        "perfil": "tecnico",
+        "acao": "enviar_telemetria",
+        "recurso": "EQ-213",
+        "resultado": "sucesso",
+        "detalhes_json": "{\"acao_alerta\": null, \"campos_imputados\": [], \"id_alerta\": null, \"id_leitura\": 10160, \"id_predicao\": 10160, \"nivel_risco\": \"MODERADO\", \"origem\": \"api_lote\", \"regra_seguranca\": null, \"score_risco\": 10.7, \"versao_modelo\": \"4.0-regressao_logistica-202609260016\"}",
+        "hash_anterior": "03181e2cdbfa537a52aa716783b32b650358b223554dbd680c997948c4e24026",
+        "hash_evento": "f6b901cb7c0d289b11a8ac5799279967c85ff2acb8df67ddf5dffe9f6f6f9cf4"
+      }
+    ]
+  },
+  {
+    "cenario": "15. Verificação de integridade (analista)",
+    "rota": "GET /auditoria/integridade",
+    "perfil": "analista",
+    "status_http": 200,
+    "resposta": {
+      "auditoria": {
+        "integra": true,
+        "eventos_verificados": 17,
+        "primeiro_evento_violado": null
+      },
+      "leituras": {
+        "integra": true,
+        "leituras_verificadas": 10160,
+        "leituras_violadas": []
+      }
+    }
+  }
+]

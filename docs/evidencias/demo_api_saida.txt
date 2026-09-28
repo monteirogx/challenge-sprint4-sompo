@@ -1,0 +1,65 @@
+
+▶ 1. Saúde da API
+  GET /saude [sem chave] -> HTTP 200
+  {"status": "ok", "versao_sistema": "4.0.0", "versao_modelo": "4.0-regressao_logistica-202609260016"}
+
+▶ 2. Trator novo em operação normal
+  POST /telemetria [operador] -> HTTP 200
+  score=0.0 nível=BAIXO
+
+▶ 3. Colheitadeira antiga em degradação (deve alertar)
+  POST /telemetria [operador] -> HTTP 200
+  score=100.0 nível=CRÍTICO
+  Fatores: ['Vibração', 'Pressão do óleo']
+  Operador: PARE a máquina assim que for seguro e acione a manutenção. Motivo: Superaquecimento severo (>= 110 °C).
+  Técnico : Inspeção imediata (até 24 h), antes de liberar a máquina: sistema de arrefecimento (radiador, bomba d'água, líquido), rolamentos, eixos e transmissão, sistema de lubrificação (nível, filtro e bomba de óleo).
+
+▶ 4. Sensor com 2 campos ausentes (completa e sinaliza)
+  POST /telemetria [tecnico] -> HTTP 200
+  score=1.2 nível=BAIXO
+
+▶ 5. Leitura inválida (erro de sensor + região inexistente)
+  POST /telemetria [operador] -> HTTP 422
+  {"erro": "leitura_invalida", "detalhe": [{"campo": "regiao", "mensagem": "Value error, região inválida; use uma de ['MT', 'GO', 'MS', 'BA', 'MG', 'SP'
+
+▶ 6. Reenvio duplicado da mesma leitura
+  POST /telemetria [operador] -> HTTP 409
+  {"erro": "leitura_duplicada", "detalhe": "Leitura de EQ-201 em 2026-09-25 23:47:18 já registrada.", "id_requisicao": "38212fc5a5a4"}
+
+▶ 7. Chave de API inválida
+  POST /telemetria [sem chave] -> HTTP 401
+  {"erro": "nao_autenticado", "detalhe": "Chave de acesso inválida.", "id_requisicao": "d5eabdcb22f0"}
+
+▶ 8. Perfil gestor tentando enviar telemetria (sem permissão)
+  POST /telemetria [gestor] -> HTTP 403
+  {"erro": "sem_permissao", "detalhe": "Perfil 'gestor' não tem permissão 'enviar_telemetria'.", "id_requisicao": "48b3fcd92a20"}
+
+▶ 9. Lote com 4 leituras válidas e 1 inválida
+  POST /telemetria/lote [tecnico] -> HTTP 200
+  {"recebidas": 5, "aceitas": 4, "rejeitadas": 1, "resultados": [{"posicao": 0, "status": "aceita", "id_leitura": 10157, "score_risco": 0.9, "nivel_risc
+
+▶ 10. Alertas ativos na frota (gestor)
+  GET /alertas [gestor] -> HTTP 200
+  {"total": 6, "alertas": [{"id_alerta": 6, "status": "ABERTO", "nivel_risco": "CRÍTICO", "score_risco": 100.0, "id_equipamento": "EQ-202", "regiao": "M
+
+▶ 11. Técnico reconhece o alerta #6 (inspeção agendada)
+  PATCH /alertas/6 [tecnico] -> HTTP 200
+  {"id_alerta": 6, "id_equipamento": "EQ-202", "status_anterior": "ABERTO", "status": "RECONHECIDO"}
+
+▶ 12. Resumo de risco por região (gestor)
+  GET /relatorios/resumo?agrupar_por=regiao [gestor] -> HTTP 200
+  [{"regiao": "BA", "leituras": 1126, "score_medio": 8.8, "pct_leituras_em_alerta": 11.1, "equipamentos_em_alerta_agora": 0}, {"regiao": "GO", "leituras
+
+▶ 13. Operador tentando ver auditoria (sem permissão)
+  GET /auditoria?limite=5 [operador] -> HTTP 403
+  {"erro": "sem_permissao", "detalhe": "Perfil 'operador' não tem permissão 'ver_auditoria'.", "id_requisicao": "952e50c72b2c"}
+
+▶ 14. Últimos eventos de auditoria (analista)
+  GET /auditoria?limite=5 [analista] -> HTTP 200
+  [{"id_evento": 17, "data_hora": "2026-09-26 00:17:19", "perfil": "operador", "acao": "ver_auditoria", "recurso": "/auditoria", "resultado": "negado", 
+
+▶ 15. Verificação de integridade (analista)
+  GET /auditoria/integridade [analista] -> HTTP 200
+  {"auditoria": {"integra": true, "eventos_verificados": 17, "primeiro_evento_violado": null}, "leituras": {"integra": true, "leituras_verificadas": 101
+
+Transcrição salva em C:\Users\HP\Desktop\Atividades FIAP\Sprint's Sompo\Challenge_Sompo_Sprint4\docs\evidencias\demo_api.json

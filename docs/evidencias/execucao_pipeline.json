@@ -1,0 +1,39 @@
+{
+  "parametros": {
+    "n_equipamentos": 80,
+    "dias": 150,
+    "semente": 42
+  },
+  "qualidade_dados": {
+    "linhas_recebidas": 10356,
+    "textos_padronizados": 643,
+    "descartadas_identificacao_invalida": 20,
+    "descartadas_duplicadas": 153,
+    "valores_fora_da_faixa_anulados": 90,
+    "descartadas_excesso_ausentes": 30,
+    "valores_imputados": 1103,
+    "linhas_validas": 10153,
+    "taxa_aproveitamento_pct": 98.04
+  },
+  "carga": {
+    "linhas_tratadas": 10153,
+    "inseridas": 10153,
+    "no_banco": 10153,
+    "sem_perda": true,
+    "integridade_hash": true
+  },
+  "modelo": {
+    "versao": "4.0-regressao_logistica-202609260016",
+    "algoritmo": "regressao_logistica",
+    "teste": {
+      "pr_auc": 0.7936,
+      "roc_auc": 0.9679,
+      "recall_alerta": 0.7588,
+      "precisao_alerta": 0.6864
+    }
+  },
+  "leituras_pontuadas": 10153,
+  "alertas_abertos": 5,
+  "relatorio": "C:\\Users\\HP\\Desktop\\Atividades FIAP\\Sprint's Sompo\\Challenge_Sompo_Sprint4\\reports\\relatorio_risco.html",
+  "duracao_segundos": 14.1
+}
