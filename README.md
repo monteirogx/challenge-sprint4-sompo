@@ -408,9 +408,9 @@ O **dashboard** (Streamlit) mostra a cada perfil só as abas permitidas:
 ## 🗃 Histórico de lançamentos
 
 * **4.0.0 - 28/09/2026** — Sprint 4: MVP consolidado (arquitetura modular, modelo com validação temporal, qualidade de dados, alertas com ciclo de vida, perfis de acesso, auditoria encadeada por hash, explicabilidade, relatórios de tendência e 96 testes automatizados).
-* 0.3.0 - 24/08/2026 — Sprint 3: integração de ponta a ponta (FastAPI, SQLite, motor preditivo e dashboard Streamlit).
-* 0.2.0 - 04/06/2026 — Sprint 2: análise exploratória e primeiro modelo preditivo de quebra.
-* 0.1.0 - 15/03/2026 — Sprint 1: mapeamento da dor de negócio da Sompo Seguros e escopo preventivo.
+* 0.3.0 - 21/08/2026 — Sprint 3: integração de ponta a ponta (FastAPI, SQLite, motor preditivo e dashboard Streamlit).
+* 0.2.0 - 02/06/2026 — Sprint 2: análise exploratória e primeiro modelo preditivo de quebra.
+* 0.1.0 - 15/03/2026 — Sprint 1: X
 
 ## 📋 Licença
 
