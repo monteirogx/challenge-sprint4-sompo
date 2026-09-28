@@ -62,7 +62,6 @@ Na Sprint 4 o protótipo da Sprint 3 virou um **MVP consolidado**:
 | **Gestor de frota** | Quero ver as máquinas mais críticas e as tendências por região e operação, para planejar paradas e reservas. | Ranking, alertas ativos e aba *Tendências* · `/relatorios/*` · relatório HTML |
 | **Analista da seguradora** | Quero rastrear entradas, saídas e decisões do sistema e confiar no modelo, para precificar e auditar sinistros. | Aba *Modelo* (métricas) e *Auditoria* (trilha com hash) · `/auditoria/integridade` |
 
-> ⚠️ *Ajuste o texto das User Stories para a redação exata escolhida pelo grupo na Sprint 1.*
 
 ---
 
