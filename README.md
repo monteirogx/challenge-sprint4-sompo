@@ -17,7 +17,7 @@
 ### Tutor(a)
 - <a href="https://www.linkedin.com/in/sabrina-otoni-22525519b/">Sabrina Otoni</a>
 ### Coordenador(a)
-- <a href="https://www.linkedin.com/">Coordenação de Curso FIAP</a>
+- <a href="https://www.linkedin.com/in/andregodoichiovato/">André Godoi</a>
 
 ## 🎥 Vídeo de demonstração (até 5 min)
 
