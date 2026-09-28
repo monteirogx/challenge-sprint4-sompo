@@ -130,7 +130,7 @@ sequenceDiagram
     SRV->>DB: grava leitura + hash SHA-256 (ANTES do modelo: o dado não se perde)
     SRV->>ML: probabilidade de falha em 7 dias + fatores
     SRV->>SRV: nível, regras de segurança, recomendações
-    SRV->>DB: grava predição (versão do modelo); se ALTO/CRÍTICO, abre ou atualiza o alerta da máquina
+    SRV->>DB: grava predição (versão do modelo), e se ALTO/CRÍTICO, abre ou atualiza o alerta da máquina
     SRV->>DB: registra evento de auditoria encadeado
     API-->>Sensor: score, nível, fatores, recomendações por perfil
 ```
