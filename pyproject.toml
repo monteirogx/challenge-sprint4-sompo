@@ -1,0 +1,11 @@
+[project]
+name = "sompo-prevencao-quebra"
+version = "4.0.0"
+description = "MVP de predição de risco de quebra de maquinário agrícola - Challenge Sompo Seguros (FIAP)"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
+filterwarnings = ["ignore::DeprecationWarning", "ignore:Using `httpx`"]

@@ -1,0 +1,20 @@
+# Segredos
+.env
+config/.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Artefatos gerados pelo pipeline (reproduzíveis com: python main.py pipeline)
+data/*.db
+data/*.db-*
+data/raw/*.csv
+data/processed/*.csv
+logs/*.log*
+
+# Guia pessoal de apoio (não faz parte da entrega)
+GUIA_DO_PROJETO.md
